@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter, Redirect } from "react-router-dom";
+import AuthStore from "../stores/AuthStore";
+import authStore from "../stores/AuthStore";
+
 
 class Login extends Component {
   state = {
@@ -13,11 +16,16 @@ class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    alert("I DON'T WORK YET");
+    AuthStore.login(this.state, this.props.history)
   };
 
   render() {
     const { username, password } = this.state;
+
+    if (authStore.user){
+      return <Redirect to="/"></Redirect>
+    }
+
     return (
       <div className="col-6 mx-auto">
         <div className="card my-5">

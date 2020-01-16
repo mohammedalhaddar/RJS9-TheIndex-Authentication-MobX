@@ -8,6 +8,7 @@ import AddAuthorCard from "./AddAuthorCard";
 
 // Store
 import authorStore from "./stores/AuthorStore";
+import authStore from "./stores/AuthStore";
 
 const AuthorsList = () => {
   const authorCards = authorStore.filteredAuthors.map(author => (
@@ -19,7 +20,9 @@ const AuthorsList = () => {
       <h3>Authors</h3>
       <SearchBar store={authorStore} />
       <div className="row">
-        <AddAuthorCard />
+        {
+         authStore.user ? <AddAuthorCard /> : <div></div>
+        }
         {authorCards}
       </div>
     </div>
